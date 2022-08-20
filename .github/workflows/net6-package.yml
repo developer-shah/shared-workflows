@@ -94,14 +94,14 @@ jobs:
       run: dotnet restore
 
     # Check for linting error
-    - name: Format Without Exclusions
-      if: ${{ inputs.exclusions == '' }}
-      shell: pwsh
-      run: dotnet format --verify-no-changes --no-restore -v diagnostic
-    - name: Format With Exclusions
-      if: ${{ inputs.exclusions != '' }}
-      shell: pwsh
-      run: dotnet format --verify-no-changes --no-restore -v diagnostic  --exclude ${{ inputs.exclusions }}
+    #- name: Format Without Exclusions
+    #  if: ${{ inputs.exclusions == '' }}
+    #  shell: pwsh
+    #  run: dotnet format --verify-no-changes --no-restore -v diagnostic
+    #- name: Format With Exclusions
+    #  if: ${{ inputs.exclusions != '' }}
+    #  shell: pwsh
+    #  run: dotnet format --verify-no-changes --no-restore -v diagnostic  --exclude ${{ inputs.exclusions }}
 
     # Build
     - name: Build Solution
