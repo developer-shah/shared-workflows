@@ -151,7 +151,7 @@ jobs:
 
     # Push package, but fail if package already exists
     - name: Push Package to Github Packages
-      if: ${{ inputs.build != 'build' }}
+      if: ${{ inputs.build != 'build' &&  inputs.nuget != 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
       run : dotnet nuget push **/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/newazmir/index.json
@@ -161,7 +161,7 @@ jobs:
       if: ${{ inputs.nuget == 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
-      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey oy2pqpvml56eon54m4nq4nkysuxjvpyubmfs77in6xjuuu
+      run: nuget push **/bin/Release/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey oy2pqpvml56eon54m4nq4nkysuxjvpyubmfs77in6xjuuu
       
     # Release tag if change to main
     - name: Tag Release in Repository with Release Notes
