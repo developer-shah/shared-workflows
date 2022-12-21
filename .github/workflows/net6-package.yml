@@ -41,6 +41,8 @@ on:
         required: true
       GITHUB_PACKAGE_USERNAME: 
         required: true
+      GITHUB_NUGET_API_KEY: 
+        required: true
 
 jobs:
   build:    
@@ -54,6 +56,7 @@ jobs:
     env:
       GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
       GITHUB_PACKAGE_USERNAME: ${{ secrets.GITHUB_PACKAGE_USERNAME }}
+      GITHUB_NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
@@ -121,7 +124,7 @@ jobs:
       if: ${{ inputs.nuget == 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
-      run: nuget push **/bin/Release/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      run: nuget push **/bin/Release/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{ secrets.GITHUB_NUGET_API_KEY }}
       
     # Release tag if change to main
     - name: Tag Release in Repository with Release Notes
