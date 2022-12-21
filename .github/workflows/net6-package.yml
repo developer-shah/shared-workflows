@@ -97,51 +97,11 @@ jobs:
       shell: pwsh
       run: dotnet restore
 
-    # Check for linting error
-    #- name: Format Without Exclusions
-    #  if: ${{ inputs.exclusions == '' }}
-    #  shell: pwsh
-    #  run: dotnet format --verify-no-changes --no-restore -v diagnostic
-    #- name: Format With Exclusions
-    #  if: ${{ inputs.exclusions != '' }}
-    #  shell: pwsh
-    #  run: dotnet format --verify-no-changes --no-restore -v diagnostic  --exclude ${{ inputs.exclusions }}
-
     # Build
     - name: Build Solution
       shell: pwsh
       run: dotnet build --no-restore -c Release -p:Version=$env:PACKAGE_VERSION
-
-
-    # Run Tests
-    - name: Run Tests
-      shell: pwsh
-      working-directory: ${{ inputs.testdirectory }}
-      run : dotnet test --no-build -c Release -p:CollectCoverage=true /p:CoverletOutputFormat=cobertura --collect:"XPlat Code Coverage"
-    
-    # Run emulator
-    - name: Integration Tests
-      if: ${{ inputs.emulator != '' }}
-      run: ${{ inputs.emulator }}
-
-    # Generate Coverage Report
-    - name: ReportGenerator
-      if: ${{ inputs.build == 'build'}}
-      uses: danielpalme/ReportGenerator-GitHub-Action@5.1.2
-      with:
-        reports: '**/coverage.cobertura.xml'
-        targetdir: 'coveragereport'
-        reporttypes: 'HtmlInline;MarkdownSummary' 
-
-    # Add Coverage Chart Comment
-    - name: Publish coverage summary
-      if: ${{ inputs.build == 'build' }}
-      uses: marocchino/sticky-pull-request-comment@v2
-      with:
-        header: coverage
-        recreate: true
-        path: coveragereport/Summary.md
-
+   
     # Pack - for Alpha,Main build
     - name: Pack Project
       if: ${{ inputs.build != 'build' }}
