@@ -157,7 +157,7 @@ jobs:
       run : dotnet nuget push **/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/newazmir/index.json
 
     # Push package to Nuget.org, but fail if package already exists
-    - name: Push Package to Github Packages
+    - name: Push Package to Nuget.org
       if: ${{ inputs.nuget == 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
