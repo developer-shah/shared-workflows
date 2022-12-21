@@ -3,6 +3,10 @@ name: net6-package-build
 on:  
   workflow_call:
     inputs:
+      nuget:
+        type: string
+        description: Whether to push to nuget.org (yes, no)
+        default: 'no'
       build:
         type: string
         description: Type of Build (build,alpha,main)
@@ -154,7 +158,7 @@ jobs:
 
     # Push package to Nuget.org, but fail if package already exists
     - name: Push Package to Github Packages
-      if: ${{ inputs.nuget == 'push' }}
+      if: ${{ inputs.nuget == 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
       run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
