@@ -161,8 +161,7 @@ jobs:
       if: ${{ inputs.nuget == 'yes' }}
       shell: pwsh
       working-directory: ${{ inputs.packagedirectory }}
-      run: nuget push **/bin/Release/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey
-       ${{secrets.NUGET_API_KEY}}
+      run: nuget push **/bin/Release/*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
       
     # Release tag if change to main
     - name: Tag Release in Repository with Release Notes
