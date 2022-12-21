@@ -152,6 +152,13 @@ jobs:
       working-directory: ${{ inputs.packagedirectory }}
       run : dotnet nuget push **/bin/Release/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/newazmir/index.json
 
+    # Push package to Nuget.org, but fail if package already exists
+    - name: Push Package to Github Packages
+      if: ${{ inputs.nuget == 'push' }}
+      shell: pwsh
+      working-directory: ${{ inputs.packagedirectory }}
+      run: nuget push **\*.nupkg -Source 'https://api.nuget.org/v3/index.json' -ApiKey ${{secrets.NUGET_API_KEY}}
+      
     # Release tag if change to main
     - name: Tag Release in Repository with Release Notes
       if: ${{ inputs.build == 'main' }}
