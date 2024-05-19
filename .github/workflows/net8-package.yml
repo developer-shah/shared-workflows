@@ -37,10 +37,10 @@ on:
         type: string
         default: 'package.json'
     secrets:
-      # GITHUB_PACKAGE_TOKEN:
-      #   required: true
-      # GITHUB_PACKAGE_USERNAME: 
-      #   required: true
+      GITHUB_PACKAGE_TOKEN:
+        required: true
+      GITHUB_PACKAGE_USERNAME: 
+        required: true
       GITHUB_NUGET_API_KEY: 
         required: true
 
@@ -54,8 +54,8 @@ jobs:
         working-directory: ${{ inputs.solutiondirectory }}
 
     env:
-      # GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
-      # GITHUB_PACKAGE_USERNAME: ${{ secrets.GITHUB_PACKAGE_USERNAME }}
+      GITHUB_PACKAGE_TOKEN: ${{ secrets.GITHUB_PACKAGE_TOKEN }}
+      GITHUB_PACKAGE_USERNAME: ${{ secrets.GITHUB_PACKAGE_USERNAME }}
       GITHUB_NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
