@@ -76,10 +76,10 @@ jobs:
       run: echo "Version ${{steps.deploy_check.outputs.releaseVersion}}"
      
     # Initialise dotnet
-    - name: Setup .NET6.0
+    - name: Setup .NET8.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 6.0.102
+        dotnet-version: 8.0.5
 
     # Retrieves Version property from package.json, available as ${{ env.PACKAGE_VERSION }}
     - name: Get Package Version
