@@ -79,7 +79,7 @@ jobs:
     - name: Setup .NET8.0
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 8.0.5
+        dotnet-version: 8.0.300
 
     # Retrieves Version property from package.json, available as ${{ env.PACKAGE_VERSION }}
     - name: Get Package Version
